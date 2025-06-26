@@ -1,80 +1,88 @@
-import { motion } from "framer-motion";
+import { FaUser, FaBirthdayCake, FaMapMarkerAlt, FaGraduationCap, FaCogs, FaMusic } from "react-icons/fa";
+import { useEffect, useState } from "react";
+
+const calculateAge = (dob) => {
+  const birthDate = new Date(dob);
+  const today = new Date();
+  let years = today.getFullYear() - birthDate.getFullYear();
+  let months = today.getMonth() - birthDate.getMonth();
+  let days = today.getDate() - birthDate.getDate();
+
+  if (days < 0) {
+    months--;
+    days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+  }
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  return `${years} years, ${months} months, ${days} days`;
+};
 
 export default function About() {
+  const [age, setAge] = useState("");
+
+  useEffect(() => {
+    setAge(calculateAge("2005-11-16"));
+  }, []);
+
+  const data = [
+    {
+      title: "Full Name",
+      value: "Ujjwal Dalal",
+      icon: <FaUser className="text-3xl text-cyan-400" />,
+    },
+    {
+      title: "Age",
+      value: age,
+      icon: <FaBirthdayCake className="text-3xl text-cyan-400" />,
+    },
+    {
+      title: "Location",
+      value: "Rohtak, Haryana, India",
+      icon: <FaMapMarkerAlt className="text-3xl text-cyan-400" />,
+    },
+    {
+      title: "Education",
+      value: "B.E. in Computer Engineering (2023-2027)\nThapar Institute of Engineering and Technology, Patiala",
+      icon: <FaGraduationCap className="text-3xl text-cyan-400" />,
+    },
+    {
+      title: "Skills",
+      value:
+        "C/C++, JS, Python, React, Express, Node.js, Tailwind, MongoDB, APIs",
+      icon: <FaCogs className="text-3xl text-cyan-400" />,
+    },
+    {
+      title: "Hobbies",
+      value: "Reading tech books, discovering music",
+      icon: <FaMusic className="text-3xl text-cyan-400" />,
+    },
+  ];
+
   return (
-    <section id="about" className="min-h-screen px-6 py-20 bg-[#0a0f1a] text-white">
-      <div className="max-w-5xl mx-auto text-center">
-        {/* Section Header */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl font-bold mb-4 text-cyan-400"
-        >
-          About Me
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="text-gray-400 max-w-2xl mx-auto mb-12"
-        >
-          I'm a passionate Full Stack Developer from India, who enjoys crafting
-          clean, efficient, and user-friendly web applications. With a deep
-          curiosity for new tech and a love for design, I bridge the gap between
-          development and UX.
-        </motion.p>
+    <section id="about" className="min-h-screen py-20 px-4  text-white">
+      <div className="max-w-5xl mx-auto">
+        <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12">
+          <span className="text-cyan-400">About</span> Me
+        </h2>
 
-        {/* Info Cards */}
-        <div className="grid md:grid-cols-2 gap-8 text-left">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-xl shadow-sm"
-          >
-            <h3 className="text-xl font-semibold text-cyan-300 mb-2">Education</h3>
-            <p className="text-gray-300">
-              B.E. in Computer Engineering<br />
-              XYZ University, 2021–2025
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-xl shadow-sm"
-          >
-            <h3 className="text-xl font-semibold text-cyan-300 mb-2">Skills</h3>
-            <p className="text-gray-300">
-              JavaScript, React, Node.js, Express, MongoDB, Tailwind, Git, REST APIs
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-xl shadow-sm"
-          >
-            <h3 className="text-xl font-semibold text-cyan-300 mb-2">Strengths</h3>
-            <p className="text-gray-300">
-              Fast learner, attention to detail, strong problem-solving skills, and a collaborative mindset.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-xl shadow-sm"
-          >
-            <h3 className="text-xl font-semibold text-cyan-300 mb-2">Interests</h3>
-            <p className="text-gray-300">
-              UI/UX design, open-source contributions, AI tools, and building side projects for fun.
-            </p>
-          </motion.div>
+        <div className="grid md:grid-cols-2 gap-8">
+          {data.map((item, index) => (
+            <div
+              key={index}
+              className="flex items-start gap-4 p-6 border border-white/10 bg-white/5 rounded-xl shadow-lg backdrop-blur-md hover:scale-[1.02] transition duration-300"
+            >
+              {item.icon}
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-1">
+                  {item.title}
+                </h3>
+                <p className="text-gray-300 whitespace-pre-line">{item.value}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

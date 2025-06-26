@@ -13,36 +13,38 @@ export default function Navbar() {
     { name: "Contact", id: "contact" },
   ];
 
-  // ScrollSpy using IntersectionObserver
+  // ScrollSpy logic (highlight current section)
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveLink(entry.target.id);
+    const handleScroll = () => {
+      let closestSection = "home";
+      let minDistance = Infinity;
+
+      links.forEach((link) => {
+        const section = document.getElementById(link.id);
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          const distance = Math.abs(rect.top);
+          if (distance < minDistance && rect.top <= window.innerHeight * 0.6) {
+            minDistance = distance;
+            closestSection = link.id;
           }
-        });
-      },
-      {
-        root: null,
-        threshold: 0.6,
-      }
-    );
+        }
+      });
 
-    links.forEach((link) => {
-      const section = document.getElementById(link.id);
-      if (section) observer.observe(section);
-    });
+      setActiveLink(closestSection);
+    };
 
-    return () => observer.disconnect();
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // run once initially
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Handle scroll-to-section
-  const handleScroll = (id) => {
+  // Scroll to section smoothly
+  const handleScrollTo = (id) => {
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth", block: "start" });
-      setIsOpen(false); // Close mobile menu
+      setIsOpen(false); // close mobile menu
     }
   };
 
@@ -51,11 +53,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
         <div className="text-cyan-400 font-bold text-2xl tracking-wide">Ujjwal Dalal</div>
 
+        {/* Desktop Menu */}
         <div className="hidden md:flex space-x-8">
           {links.map((link) => (
             <button
               key={link.id}
-              onClick={() => handleScroll(link.id)}
+              onClick={() => handleScrollTo(link.id)}
               className={`relative group font-medium transition duration-300 ${
                 activeLink === link.id
                   ? "text-cyan-400"
@@ -72,7 +75,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile menu toggle */}
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)} className="text-gray-300">
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -86,7 +89,7 @@ export default function Navbar() {
           {links.map((link) => (
             <button
               key={link.id}
-              onClick={() => handleScroll(link.id)}
+              onClick={() => handleScrollTo(link.id)}
               className={`block text-base font-medium transition duration-200 ${
                 activeLink === link.id
                   ? "text-cyan-400"

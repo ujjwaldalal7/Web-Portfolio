@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import ParticlesBackground from "./components/ParticlesBackground";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Projects from "./pages/Projects";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
 
       <Element name="about">
         <About />
+      </Element>
+
+      <Element name="projects">
+        <Projects />        
       </Element>
     </div>
   );
