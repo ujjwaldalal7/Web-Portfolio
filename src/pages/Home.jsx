@@ -39,14 +39,12 @@ export default function Home() {
   const currentQuote = quotes[quoteIndex];
   setTypedText("");
 
-  // ✅ Safety check
   if (!currentQuote) return;
 
   const typing = setInterval(() => {
     index++;
     setTypedText(currentQuote.slice(0, index));
 
-    // Stop when complete
     if (index >= currentQuote.length) {
       clearInterval(typing);
     }
@@ -61,7 +59,6 @@ export default function Home() {
       id="home"
       className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center px-6 md:px-20 py-24 gap-12 relative z-10"
     >
-      {/* Left Text */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -75,7 +72,6 @@ export default function Home() {
           </span>
         </h1>
 
-        {/* Roles (Dynamic) */}
         <AnimatePresence mode="wait">
           <motion.p
             key={roles[roleIndex]}
@@ -89,14 +85,11 @@ export default function Home() {
           </motion.p>
         </AnimatePresence>
 
-        {/* Typewriter Quote */}
         <p className="italic text-gray-400 mt-6 h-[40px]">
           “{typedText}
           <span className="animate-pulse">|</span>”
         </p>
       </motion.div>
-
-      {/* Right Profile */}
       <motion.div
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}

@@ -8,7 +8,7 @@ const projects = [
       "A gesture recognition system to classify 20+ signs and improve accessibility.",
     tech: ["Python", "TensorFlow", "MediaPipe", "NumPy"],
     source: "https://github.com/ujjwaldalal7/AI-Project",
-    demo: "#", // or real deployment link
+    demo: "#",
   },
   {
     title: "PEN-COPY : E-Commerce Website",

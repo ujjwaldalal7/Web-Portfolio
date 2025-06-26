@@ -1,11 +1,23 @@
+import { useState, useEffect } from "react";
 import { Element } from "react-scroll";
 import Navbar from "./components/Navbar";
 import ParticlesBackground from "./components/ParticlesBackground";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
+import Contact from "./pages/Contact";
+import Loader from "./components/Loader";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <Loader />;
+
   return (
     <div className="relative text-white scroll-smooth">
       <ParticlesBackground />
@@ -20,7 +32,11 @@ function App() {
       </Element>
 
       <Element name="projects">
-        <Projects />        
+        <Projects />
+      </Element>
+
+      <Element name="contact">
+        <Contact />
       </Element>
     </div>
   );

@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import Particles from "react-particles";
-import { loadSlim } from "tsparticles-slim"; // ✅ Make sure it's installed!
+import { loadSlim } from "tsparticles-slim";
 
 export default function ParticlesBackground() {
   const particlesInit = useCallback(async (engine) => {
-    await loadSlim(engine); // ✅ load slim config
+    await loadSlim(engine);
   }, []);
 
   return (

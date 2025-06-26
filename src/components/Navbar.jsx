@@ -9,11 +9,9 @@ export default function Navbar() {
     { name: "Home", id: "home" },
     { name: "About", id: "about" },
     { name: "Projects", id: "projects" },
-    { name: "Skills", id: "skills" },
     { name: "Contact", id: "contact" },
   ];
 
-  // ScrollSpy logic (highlight current section)
   useEffect(() => {
     const handleScroll = () => {
       let closestSection = "home";
@@ -35,7 +33,7 @@ export default function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // run once initially
+    handleScroll(); 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
