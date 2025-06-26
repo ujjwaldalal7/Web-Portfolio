@@ -1,13 +1,22 @@
+import { Element } from "react-scroll";
+import Navbar from "./components/Navbar";
 import ParticlesBackground from "./components/ParticlesBackground";
+import Home from "./pages/Home";
+import About from "./pages/About";
 
 function App() {
   return (
-    <div className="relative min-h-screen text-white">
+    <div className="relative text-white scroll-smooth">
       <ParticlesBackground />
-      <main className="relative z-10 p-10">
-        <h1 className="text-4xl font-bold">Ujjwal Dalal</h1>
-        <p>Now this is working particles ✅</p>
-      </main>
+      <Navbar />
+
+      <Element name="home">
+        <Home />
+      </Element>
+
+      <Element name="about">
+        <About />
+      </Element>
     </div>
   );
 }
