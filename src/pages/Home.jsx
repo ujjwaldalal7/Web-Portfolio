@@ -26,7 +26,7 @@ export default function Home() {
 
     const quoteTimer = setInterval(() => {
       setQuoteIndex((prev) => (prev + 1) % quotes.length);
-    }, 7000); // switch quote every 7s (typing takes time)
+    }, 7000);
 
     return () => {
       clearInterval(roleTimer);
@@ -35,24 +35,22 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-  let index = 0;
-  const currentQuote = quotes[quoteIndex];
-  setTypedText("");
+    let index = 0;
+    const currentQuote = quotes[quoteIndex];
+    setTypedText("");
 
-  if (!currentQuote) return;
+    if (!currentQuote) return;
 
-  const typing = setInterval(() => {
-    index++;
-    setTypedText(currentQuote.slice(0, index));
+    const typing = setInterval(() => {
+      index++;
+      setTypedText(currentQuote.slice(0, index));
+      if (index >= currentQuote.length) {
+        clearInterval(typing);
+      }
+    }, 50);
 
-    if (index >= currentQuote.length) {
-      clearInterval(typing);
-    }
-  }, 50);
-
-  return () => clearInterval(typing);
-}, [quoteIndex]);
-
+    return () => clearInterval(typing);
+  }, [quoteIndex]);
 
   return (
     <section
@@ -89,7 +87,19 @@ export default function Home() {
           “{typedText}
           <span className="animate-pulse">|</span>”
         </p>
+        <motion.a
+          href="https://drive.google.com/file/d/1pGKtNFbGmNM4JjwPcXbJvLet3kQmVc0b/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="inline-block mt-8 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-medium rounded-lg shadow-lg hover:from-blue-500 hover:to-purple-500 transition-all duration-300"
+        >
+          📁 Download Resume
+        </motion.a>
       </motion.div>
+
       <motion.div
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}

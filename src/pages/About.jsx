@@ -1,90 +1,113 @@
-import { FaUser, FaBirthdayCake, FaMapMarkerAlt, FaGraduationCap, FaCogs, FaMusic } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { FaGraduationCap, FaBriefcase, FaUser, FaLaptopCode, FaMusic } from "react-icons/fa6";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
-const calculateAge = (dob) => {
-  const birthDate = new Date(dob);
-  const today = new Date();
-  let years = today.getFullYear() - birthDate.getFullYear();
-  let months = today.getMonth() - birthDate.getMonth();
-  let days = today.getDate() - birthDate.getDate();
+export default function ProfileDetails() {
+  const cardStyle =
+    "bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl shadow-lg border border-gray-700 hover:shadow-xl hover:scale-[1.02] transition-all duration-300";
 
-  if (days < 0) {
-    months--;
-    days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
-  }
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
-
-  return `${years} years, ${months} months, ${days} days`;
-};
-
-export default function About() {
-  const [age, setAge] = useState("");
-
-  useEffect(() => {
-    setAge(calculateAge("2005-11-16"));
-  }, []);
-
-  const data = [
-    {
-      title: "Full Name",
-      value: "Ujjwal Dalal",
-      icon: <FaUser className="text-3xl text-cyan-400" />,
-    },
-    {
-      title: "Age",
-      value: age,
-      icon: <FaBirthdayCake className="text-3xl text-cyan-400" />,
-    },
-    {
-      title: "Location",
-      value: "Rohtak, Haryana, India",
-      icon: <FaMapMarkerAlt className="text-3xl text-cyan-400" />,
-    },
-    {
-      title: "Education",
-      value: "B.E. in Computer Engineering (2023-2027)\nThapar Institute of Engineering and Technology, Patiala",
-      icon: <FaGraduationCap className="text-3xl text-cyan-400" />,
-    },
-    {
-      title: "Skills",
-      value:
-        "C/C++, JS, Python, React, Express, Node.js, Tailwind, MongoDB, APIs",
-      icon: <FaCogs className="text-3xl text-cyan-400" />,
-    },
-    {
-      title: "Hobbies",
-      value: "Reading tech books, discovering music",
-      icon: <FaMusic className="text-3xl text-cyan-400" />,
-    },
-  ];
+  const titleStyle = "flex items-center gap-2 text-lg font-semibold text-white mb-3";
+  const textStyle = "text-gray-300 leading-relaxed";
 
   return (
-    <section id="about" className="min-h-screen py-20 px-4  text-white">
-      <div className="max-w-5xl mx-auto">
-        <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12">
-          <span className="text-cyan-400">About</span> Me
-        </h2>
+    <div id="about">
+    <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12">
+           <span className="text-cyan-400">About</span> Me
+         </h2>
+    <div className="max-w-6xl mx-auto p-6 space-y-10">
+      {/* Top Grid */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Name */}
+        <div className={cardStyle}>
+          <h3 className={titleStyle}>
+            <FaUser className="text-blue-400" /> Full Name
+          </h3>
+          <p className={textStyle}>Ujjwal Dalal</p>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {data.map((item, index) => (
-            <div
-              key={index}
-              className="flex items-start gap-4 p-6 border border-white/10 bg-white/5 rounded-xl shadow-lg backdrop-blur-md hover:scale-[1.02] transition duration-300"
-            >
-              {item.icon}
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-1">
-                  {item.title}
-                </h3>
-                <p className="text-gray-300 whitespace-pre-line">{item.value}</p>
-              </div>
-            </div>
-          ))}
+        {/* Age */}
+        <div className={cardStyle}>
+          <h3 className={titleStyle}>🎂 Age</h3>
+          <p className={textStyle}>19 years, 8 months, 30 days</p>
+        </div>
+
+        {/* Location */}
+        <div className={cardStyle}>
+          <h3 className={titleStyle}>
+            <FaMapMarkerAlt className="text-red-400" /> Location
+          </h3>
+          <p className={textStyle}>Rohtak, Haryana, India</p>
+        </div>
+
+        {/* Education */}
+        <div className={cardStyle}>
+          <h3 className={titleStyle}>
+            <FaGraduationCap className="text-green-400" /> Education
+          </h3>
+          <p className={textStyle}>
+            B.E. in Computer Engineering (2023–2027) 
+            Thapar Institute of Engineering and Technology, Patiala
+          </p>
+          <br />
+          <p className={textStyle}>
+            Schooling: D.A.V. Centenary Public School, Rohtak (2009–2023)
+          </p>
+        </div>
+
+        {/* Technical Skills */}
+        <div className={cardStyle}>
+          <h3 className={titleStyle}>
+            <FaLaptopCode className="text-purple-400" /> Technical Skills
+          </h3>
+          <p className={textStyle}>
+            <span className="font-semibold text-white">Languages:</span> C, C++, HTML, CSS, JavaScript, Python <br />
+            <span className="font-semibold text-white">Frameworks:</span> React, Express, Node.js, Tailwind CSS <br />
+            <span className="font-semibold text-white">Databases:</span> MongoDB, MySQL, PostgreSQL <br />
+            <span className="font-semibold text-white">Tools:</span> Postman, VS Code, Git, GitHub
+          </p>
+        </div>
+
+        {/* Hobbies */}
+        <div className={cardStyle}>
+          <h3 className={titleStyle}>
+            <FaMusic className="text-pink-400" /> Hobbies
+          </h3>
+          <p className={textStyle}>
+            Reading Tech books
+            <br/><br/>
+            Discovering music
+            <br/><br/>
+            Civic Engagement Study
+            </p>
         </div>
       </div>
-    </section>
+
+      {/* Full-width Experience */}
+      <div className={cardStyle}>
+  <h3 className={titleStyle}>
+    <FaBriefcase className="text-yellow-400" /> Experience
+  </h3>
+
+  {/* Amazon ML Summer School */}
+  <div className="mb-4">
+    <div className="flex justify-between items-start">
+      <span className="font-semibold">Amazon ML Summer School 2025</span>
+      <span className="text-sm text-gray-400">Aug 2025</span>
+    </div>
+    <p className={textStyle}>Selected Participant</p>
+  </div>
+
+  {/* BSNL Training */}
+  <div>
+    <div className="flex justify-between items-start">
+      <span className="font-semibold">Summer Industrial Training – BSNL</span>
+      <span className="text-sm text-gray-400">Jun 2025</span>
+    </div>
+    <p className={textStyle}>Trainee – Telecommunications & Networking</p>
+    <p className={`${textStyle} text-gray-400`}>Rohtak, Haryana, India</p>
+  </div>
+</div>
+
+    </div>
+    </div>
   );
 }
