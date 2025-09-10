@@ -88,7 +88,7 @@ export default function Home() {
           <span className="animate-pulse">|</span>”
         </p>
         <motion.a
-          href="https://drive.google.com/file/d/1pGKtNFbGmNM4JjwPcXbJvLet3kQmVc0b/view?usp=sharing"
+          href="https://drive.google.com/file/d/1z-GMswC3KkkHoX15AHFngLY2NhOPc2XQ/view?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, y: 20 }}
@@ -99,22 +99,23 @@ export default function Home() {
           📁 Download Resume
         </motion.a>
       </motion.div>
-
       <motion.div
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="w-full md:w-1/3 flex justify-center"
-      >
-        <div className="relative w-40 h-40 sm:w-52 sm:h-52 md:w-60 md:h-60">
-          <div className="absolute inset-0 rounded-full bg-cyan-500 blur-2xl opacity-30 animate-pulse" />
-          <img
-            src="/profile.jpg"
-            alt="Ujjwal Dalal"
-            className="relative w-full h-full object-cover rounded-full border-4 border-white shadow-xl z-10"
-          />
-        </div>
-      </motion.div>
+  initial={{ opacity: 0, y: -40 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="w-full md:w-1/3 flex justify-center"
+>
+  <div className="relative w-fit h-fit sm:w-52 sm:h-64 md:w-60 md:h-72">
+    <div className="absolute inset-0 bg-cyan-500 blur-2xl opacity-30 animate-pulse rounded-2xl" />
+    <img
+      src="/profile.jpg"
+      alt="Ujjwal Dalal"
+      className="relative w-full h-full object-contain rounded-xl shadow-xl z-10"
+    />
+  </div>
+</motion.div>
+
+
     </section>
   );
 }
