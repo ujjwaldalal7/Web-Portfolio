@@ -9,6 +9,7 @@ export default function Contact() {
 
       <div className="grid md:grid-cols-2 gap-10">
         <form
+          method="POST"
           action="https://formspree.io/f/movwpbjj"
           className="space-y-6 bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/20 shadow-lg"
         >

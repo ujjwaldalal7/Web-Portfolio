@@ -7,7 +7,8 @@ import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import Loader from "./components/Loader";
-
+import Certifications from "./pages/Certifications";
+import { Analytics } from "@vercel/analytics/react";
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -35,9 +36,15 @@ function App() {
         <Projects />
       </Element>
 
+      <Element name="certifications">
+        <Certifications />
+      </Element>
+
       <Element name="contact">
         <Contact />
       </Element>
+
+      <Analytics />
     </div>
   );
 }

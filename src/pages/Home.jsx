@@ -88,7 +88,7 @@ export default function Home() {
           <span className="animate-pulse">|</span>”
         </p>
         <motion.a
-          href="https://drive.google.com/file/d/1z-GMswC3KkkHoX15AHFngLY2NhOPc2XQ/view?usp=drive_link"
+          href="https://drive.google.com/file/d/1N_gNdDNzh92KBCod3bLPNfdqbUjz6NRr/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, y: 20 }}
