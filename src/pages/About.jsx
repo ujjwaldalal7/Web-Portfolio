@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { FaGraduationCap, FaBriefcase, FaUser, FaLaptopCode, FaMusic } from "react-icons/fa6";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
@@ -7,6 +8,64 @@ export default function ProfileDetails() {
 
   const titleStyle = "flex items-center gap-2 text-lg font-semibold text-white mb-3";
   const textStyle = "text-gray-300 leading-relaxed";
+
+  // Compute precise calendar difference between birth date and now
+  const computeAge = (birthDate, nowDate = new Date()) => {
+    const birth = new Date(birthDate);
+    const now = new Date(nowDate);
+
+    let years = now.getFullYear() - birth.getFullYear();
+    let months = now.getMonth() - birth.getMonth();
+    let days = now.getDate() - birth.getDate();
+    let hours = now.getHours() - birth.getHours();
+    let minutes = now.getMinutes() - birth.getMinutes();
+    let seconds = now.getSeconds() - birth.getSeconds();
+
+    if (seconds < 0) {
+      seconds += 60;
+      minutes -= 1;
+    }
+    if (minutes < 0) {
+      minutes += 60;
+      hours -= 1;
+    }
+    if (hours < 0) {
+      hours += 24;
+      days -= 1;
+    }
+    if (days < 0) {
+      // days in previous month relative to `now`
+      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+      days += prevMonth.getDate();
+      months -= 1;
+    }
+    if (months < 0) {
+      months += 12;
+      years -= 1;
+    }
+
+    return { years, months, days, hours, minutes, seconds };
+  };
+
+  // Live-updating age component using DOB: 16 Nov 2005 (month is 10 because Date months are 0-indexed)
+  function AgeLive() {
+    const DOB = new Date(2005, 10, 16, 0, 0, 0);
+    const [age, setAge] = useState(() => computeAge(DOB));
+
+    useEffect(() => {
+      const tick = () => setAge(computeAge(DOB));
+      const id = setInterval(tick, 1000);
+      // run once immediately to avoid 1s flicker
+      tick();
+      return () => clearInterval(id);
+    }, []);
+
+    return (
+      <p className={textStyle}>
+        {`${age.years} years, ${age.months} months, ${age.days} days, ${String(age.hours).padStart(2, "0")}h ${String(age.minutes).padStart(2, "0")}m ${String(age.seconds).padStart(2, "0")}s`}
+      </p>
+    );
+  }
 
   return (
     <div id="about">
@@ -27,7 +86,7 @@ export default function ProfileDetails() {
         {/* Age */}
         <div className={cardStyle}>
           <h3 className={titleStyle}>🎂 Age</h3>
-          <p className={textStyle}>19 years, 8 months, 30 days</p>
+          <AgeLive />
         </div>
 
         {/* Location */}
