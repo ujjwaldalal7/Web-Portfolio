@@ -146,6 +146,14 @@ export default function ProfileDetails() {
     <FaBriefcase className="text-yellow-400" /> Experience
   </h3>
 
+    <div className="mb-4">
+    <div className="flex justify-between items-start">
+      <span className="font-semibold">Intern @ CreditSea</span>
+      <span className="text-sm text-gray-400">Oct 2025 - Present</span>
+    </div>
+    <p className={textStyle}>Full Stack Developer Intern</p>
+  </div>
+
   {/* Amazon ML Summer School */}
   <div className="mb-4">
     <div className="flex justify-between items-start">
